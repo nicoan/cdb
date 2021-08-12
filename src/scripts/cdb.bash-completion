@@ -1,0 +1,41 @@
+# -*- shell-script -*-
+# cdb(1) bash-completion specification.
+
+_cdb() {
+  case ${COMP_WORDS[1]} in
+    -a*|--add*|-u*|--update)
+      # Third argument is the bookmarks we already have (user maybe wants a similar name)
+      if [ "${#COMP_WORDS[@]}" == "3" ]; then
+        COMPREPLY=($(compgen -W "$($CDB_MANAGER_PATH -f ${COMP_WORDS[2]})" -- "${COMP_WORDS[2]}"))
+      fi
+
+      # Fourth argument is a path
+      if [ "${#COMP_WORDS[@]}" == "4" ]; then
+        compopt -o filenames
+        COMPREPLY=($(compgen -d "${COMP_WORDS[3]}"))
+      fi
+    ;;
+    -r*|--remove*|-s*|--show*)
+      # Third argument is a bookmark name...
+      if [ "${#COMP_WORDS[@]}" == "3" ]; then
+        COMPREPLY=($(compgen -W "$($CDB_MANAGER_PATH -f ${COMP_WORDS[2]})" -- "${COMP_WORDS[2]}"))
+      fi
+    ;;
+    -*|--*)
+      # First argument is a flag/option...
+      if [ "${#COMP_WORDS[@]}" == "2" ]; then
+        COMPREPLY=($(compgen -W "--help --list --version --add --find --remove --show --update" -- "${COMP_WORDS[1]}"))
+      fi
+    ;;
+    *)
+      # Second argument is a bookmark name...
+      if [ "${#COMP_WORDS[@]}" == "2" ]; then
+        COMPREPLY=($(compgen -W "$($CDB_MANAGER_PATH -f ${COMP_WORDS[1]})" -- "${COMP_WORDS[1]}"))
+      fi
+    ;;
+    esac
+
+    return 0
+}
+
+complete -F _cdb cdb

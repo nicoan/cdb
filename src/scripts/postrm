@@ -1,0 +1,16 @@
+#!/bin/bash
+set -e
+
+remove_cdb_load () {
+  if [ -f "${1}" ]; then
+    echo -n "Removing source to cdb bash function in \"${1}\" file... "
+    sed -i '/# CDB/,/# CDB END/ d' ${1}
+    echo -e "OK!"
+  fi
+}
+
+# Remove cdb sourcing from bash initialization files
+remove_cdb_load "/etc/bash.bashrc"
+remove_cdb_load "/etc/bashrc"
+
+#DEBHELPER#

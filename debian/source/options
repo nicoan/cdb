@@ -1,0 +1,3 @@
+--tar-ignore=packages
+--tar-ignore=.git
+--tar-ignore=.gitignore

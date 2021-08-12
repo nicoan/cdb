@@ -1,0 +1,12 @@
+Source: cdb
+Maintainer: Nicolás Antinori <nicolas.antinori.7@gmail.com>
+Section: misc
+Priority: optional
+Standards-Version: 4.3.0
+Build-Depends: debhelper (>= 10), bash-completion, cargo
+
+Package: cdb
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Tool to bookmark directories in the command line.
+ A simple shell tool for bookmarking directories in the filesystem.

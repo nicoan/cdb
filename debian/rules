@@ -1,0 +1,8 @@
+#!/usr/bin/make -f
+export DH_ALWAYS_EXCLUDE=CVS
+
+%:
+	dh $@ --with bash-completion
+
+override_dh_auto_install:
+	$(MAKE) DESTDIR=$$(pwd)/debian/cdb prefix=/usr install-deb

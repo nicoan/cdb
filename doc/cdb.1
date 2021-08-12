@@ -1,0 +1,50 @@
+.TH CDB "1" "July 2021" "cdb 0.1.0" "User Commands"
+.SH NAME
+cdb - Change Directory to Bookmark
+.SH SYNOPSIS
+.B cdb
+[\fI\,OPTION\/\fR] [--] [\fI\,bookmark\/\fR]
+.SH DESCRIPTION
+.PP
+A tool to bookmark directories in the command line.
+
+Supported shells: bash.
+.SH OPTIONS
+.PP
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+Prints help information
+.TP
+\fB\-l\fR, \fB\-\-list\fR
+List all bookmarks
+.TP
+\fB\-V\fR, \fB\-\-version\fR
+Prints version information
+.TP
+\fB\-a\fR, \fB\-\-add\fR <\fI\,bookmark\/\fR> <\fI\,path\/\fR>
+Adds a directory bookmark with name <\fI\,bookmark\/\fR> pointing at <\fI\,path\/\fR>
+.TP
+\fB\-f\fR, \fB\-\-find\fR <\fI\,pattern\/\fR>
+List all the bookmark names that start with <\fI\,pattern\/\fR>
+.TP
+\fB\-r\fR, \fB\-\-remove\fR <\fI\,bookmark\/\fR>
+Removes a directory bookmark with name <\fI\,bookmark\/\fR>
+.TP
+\fB\-s\fR, \fB\-\-show\fR <\fI\,bookmark\/\fR>
+Outputs where <\fI\,bookmark\/\fR> is pointing
+.TP
+\fB\-u\fR, \fB\-\-update\fR <\fI\,bookmark\/\fR> <\fI\,new_path\/\fR>
+Updates the path pointed by <\fI\,bookmark\/\fR>
+.SH EXAMPLES
+.PP
+.TP
+cdb --add projects /home/foo/projects\fR
+Adds a directory bookmark named "projects" pointing to /home/foo/projects path.
+.TP
+cdb -u projects /home/bar/projects\fR
+Updates the path pointed by the bookmark named "projects" from /home/foo/projects to /home/bar/projects.
+.TP
+cdb projects\fR
+Changes the current directory to the one pointed by "projects" bookmark.
+.SH AUTHORS
+Written by Nicolas Antinori.

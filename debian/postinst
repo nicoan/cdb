@@ -1,0 +1,24 @@
+#!/bin/bash
+set -e
+
+inject_cdb_load () {
+  if [ -f "${1}" ]; then
+    echo "Installing bash function in ${1} file ..."
+    echo "# CDB" >> ${1}
+    echo "# WARNING: Do not insert anything between the CDB tags. It will be erased" >> ${1}
+    echo "# if cdb is uninstalled" >> ${1}
+    echo "if [ -f \"/etc/profile.d/cdb.sh\" ]; then" >> ${1}
+    echo "    . /etc/profile.d/cdb.sh" >> ${1}
+    echo "fi" >> ${1}
+    echo "# CDB END" >> ${1}
+  fi
+}
+
+# Inject cdb sourcing in bash initialziation files
+inject_cdb_load "/etc/bash.bashrc"
+inject_cdb_load "/etc/bashrc"
+
+echo "ATTENTION: You should restart your shell (for non-login shells) or re-login (for login shells) to be able to use cdb."
+echo "If you don't want to restart you shell, then execute \". /etc/profile.d/cdb.sh\" here."
+
+#DEBHELPER#
